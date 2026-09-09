@@ -2,8 +2,6 @@ name: Bootstrap Illuminated Site
 
 on:
   push:
-    paths:
-      - '.github/workflows/bootstrap-site.yml'
   workflow_dispatch:
 
 permissions:
