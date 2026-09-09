@@ -1,0 +1,64 @@
+name: Finalize Illuminated Subdomain
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-subdomain.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Update invisible site references for the subdomain
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          old = 'https://neuronaut.live/illuminated/'
+          new = 'https://illuminated.neuronaut.live/'
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          text = text.replace(old, new)
+          index.write_text(text, encoding='utf-8')
+
+          page404 = Path('404.html')
+          text = page404.read_text(encoding='utf-8')
+          text = text.replace('/illuminated/', '/')
+          page404.write_text(text, encoding='utf-8')
+
+          manifest = Path('manifest.webmanifest')
+          text = manifest.read_text(encoding='utf-8')
+          text = text.replace('/illuminated/', '/')
+          manifest.write_text(text, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          text = sitemap.read_text(encoding='utf-8')
+          text = text.replace(old, new)
+          text = text.replace('<lastmod>2026-08-01</lastmod>', '<lastmod>2026-09-09</lastmod>')
+          sitemap.write_text(text, encoding='utf-8')
+
+          Path('robots.txt').write_text(
+              'User-agent: *\nAllow: /\n\nSitemap: https://illuminated.neuronaut.live/sitemap.xml\n',
+              encoding='utf-8'
+          )
+          PY
+
+      - name: Commit technical subdomain updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html 404.html manifest.webmanifest sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "No changes needed."
+          else
+            git commit -m "Finalize Illuminated subdomain references"
+            git push
+          fi
