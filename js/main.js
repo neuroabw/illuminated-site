@@ -14,6 +14,46 @@
   const navToggle = document.querySelector('[data-nav-toggle]');
   const navLinks = document.querySelector('[data-nav-links]');
 
+  /* Seasonal treatment: restrained vintage multicolor strand-light accents.
+     Kept separate from the permanent brand stylesheet so it can be removed cleanly. */
+  const seasonalStylesheet = document.createElement('link');
+  seasonalStylesheet.rel = 'stylesheet';
+  seasonalStylesheet.href = 'css/holiday.css?v=20260917';
+  document.head.appendChild(seasonalStylesheet);
+
+  const holidayPalette = ['red', 'amber', 'green', 'blue', 'ivory'];
+  const createHolidayStrand = (variant, bulbCount) => {
+    const strand = document.createElement('div');
+    strand.className = `holiday-strand holiday-strand--${variant}`;
+    strand.setAttribute('aria-hidden', 'true');
+
+    const bulbs = document.createElement('div');
+    bulbs.className = 'holiday-strand__bulbs';
+
+    for (let index = 0; index < bulbCount; index += 1) {
+      const bulb = document.createElement('span');
+      const color = holidayPalette[index % holidayPalette.length];
+      bulb.className = `holiday-bulb holiday-bulb--${color}`;
+      bulbs.appendChild(bulb);
+    }
+
+    strand.appendChild(bulbs);
+    return strand;
+  };
+
+  const placeHolidayStrand = (selector, variant, bulbCount, position = 'prepend') => {
+    const host = document.querySelector(selector);
+    if (!host || host.querySelector(`.holiday-strand--${variant}`)) return;
+    const strand = createHolidayStrand(variant, bulbCount);
+    if (position === 'append') host.appendChild(strand);
+    else host.prepend(strand);
+  };
+
+  placeHolidayStrand('.hero', 'hero', 11);
+  placeHolidayStrand('.founders-card', 'founders', 6, 'append');
+  placeHolidayStrand('.estimate-section', 'estimate', 8);
+  placeHolidayStrand('.site-footer', 'footer', 7);
+
   navToggle?.addEventListener('click', () => {
     if (!navLinks) return;
     const open = navLinks.classList.toggle('open');
