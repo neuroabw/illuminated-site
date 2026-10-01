@@ -230,7 +230,7 @@
       service: String(data.get('service') || '').trim(),
       timing: String(data.get('timing') || '').trim(),
       contactMethod: String(data.get('contactMethod') || '').trim(),
-      notes: [String(data.get('quoteSummary') || '').trim(), String(data.get('notes') || '').trim()].filter(Boolean).join('\n\n'),
+      notes: [data.get('quoteInclude') ? String(data.get('quoteSummary') || '').trim() : '', String(data.get('notes') || '').trim()].filter(Boolean).join('\n\n'),
       contactConsent: Boolean(data.get('contactConsent')),
       notificationEmail: String(config.formRecipient || config.estimateEmail || 'illuminatedforms@neuronaut.live'),
       turnstileToken,
