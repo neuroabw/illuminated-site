@@ -26,9 +26,15 @@
   }
   document.querySelectorAll('[data-change]').forEach(btn=>btn.addEventListener('click',()=>{const key=btn.dataset.change;state[key]=Math.max(0,state[key]+Number(btn.dataset.delta));render();}));
   document.querySelectorAll('input[name="package"],input[name="color"]').forEach(input=>input.addEventListener('change',render));
-  const dialog=document.querySelector('#request-dialog'); const requestForm=document.querySelector('#estimate-request-form'); const msg=document.querySelector('#request-message');
-  document.querySelector('#continue').addEventListener('click',()=>{const x=summary(); const selection=[x.pkg.dataset.label+' ('+money(Number(x.pkg.value))+')',x.color,...x.extras.map(([key,n])=>items[key].label+': '+(items[key].suffix?n+items[key].suffix:n))].join('; '); requestForm.querySelector('#selection-summary').value=selection; dialog.showModal();});
-  document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
-  requestForm.addEventListener('submit',async e=>{e.preventDefault();if(!requestForm.reportValidity())return;const data=new FormData(requestForm);const x=summary();const payload={name:String(data.get('name')).trim(),phone:String(data.get('phone')).trim(),email:String(data.get('email')).trim(),address:String(data.get('address')).trim(),service:'Holiday lighting calculator estimate',timing:'Calculator request',contactMethod:'Email',notes:'Calculator selection: '+String(data.get('selection-summary'))+'; Customer notes: '+String(data.get('notes')||'').trim(),contactConsent:true,company:'',notificationEmail:recipient,calculatorEstimate:money(x.total)};msg.textContent='Sending your request…';msg.className='request-message';try{if(!apiBase)throw new Error('No form endpoint');const response=await fetch(apiBase+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!response.ok)throw new Error('Request failed');msg.textContent='Thank you — your estimate request was received.';msg.className='request-message is-success';requestForm.reset();}catch(error){const subject=encodeURIComponent('Holiday lighting calculator estimate');const body=encodeURIComponent('Please send me an estimate.\n\n'+payload.notes+'\n\nName: '+payload.name+'\nPhone: '+payload.phone+'\nEmail: '+payload.email+'\nAddress: '+payload.address);msg.innerHTML='We could not submit online. <a href="mailto:'+recipient+'?subject='+subject+'&body='+body+'">Email this estimate instead</a>.';msg.className='request-message is-error';}});
+  document.querySelector('#continue').addEventListener('click', () => {
+    const x = summary();
+    const selection = [
+      x.pkg.dataset.label + ' (' + money(Number(x.pkg.value)) + ')',
+      x.color,
+      ...x.extras.map(([key, n]) => items[key].label + ': ' + (items[key].suffix ? n + items[key].suffix : n))
+    ].join('; ');
+    window.sessionStorage.setItem('illuminatedCalculatorSummary', 'Quick estimate: ' + money(x.total) + '. Selections: ' + selection + '.');
+    window.location.href = 'index.html#estimate';
+  });
   render();
 })();
