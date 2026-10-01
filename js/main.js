@@ -230,7 +230,7 @@
       service: String(data.get('service') || '').trim(),
       timing: String(data.get('timing') || '').trim(),
       contactMethod: String(data.get('contactMethod') || '').trim(),
-      notes: String(data.get('notes') || '').trim(),
+      notes: [String(data.get('quoteSummary') || '').trim(), String(data.get('notes') || '').trim()].filter(Boolean).join('\n\n'),
       contactConsent: Boolean(data.get('contactConsent')),
       notificationEmail: String(config.formRecipient || config.estimateEmail || 'illuminatedforms@neuronaut.live'),
       turnstileToken,
@@ -338,4 +338,30 @@
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = String(new Date().getFullYear());
+  const quoteBuilder = estimateForm?.querySelector('.quote-builder');
+  if (quoteBuilder) {
+    const quoteState = { roofline: 0, peak: 0, trunk: 0, tree: 0, wreath: 0, walkway: 0, window: 0, shrub: 0 };
+    const quoteItems = { roofline:{label:'Extra roofline',unit:70,increment:10,suffix:' ft'},peak:{label:'Simple peak',unit:95,increment:1,suffix:''},trunk:{label:'Tree trunk',unit:95,increment:1,suffix:''},tree:{label:'Tree with limbs',unit:195,increment:1,suffix:''},wreath:{label:'36-inch wreath',unit:95,increment:1,suffix:''},walkway:{label:'Walkway lighting',unit:95,increment:1,suffix:''},window:{label:'Lit window',unit:45,increment:1,suffix:''},shrub:{label:'Shrub accent',unit:65,increment:1,suffix:''} };
+    const formatMoney = value => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+    const packageChoice = () => quoteBuilder.querySelector('input[name="quotePackage"]:checked');
+    const renderQuote = () => {
+      const selected = packageChoice();
+      const color = quoteBuilder.querySelector('input[name="quoteColor"]:checked').value;
+      const extras = Object.entries(quoteState).filter(([, value]) => value > 0);
+      const extraTotal = extras.reduce((sum, [key, value]) => sum + (value / quoteItems[key].increment) * quoteItems[key].unit, 0);
+      const total = Number(selected.value) + extraTotal;
+      quoteBuilder.querySelector('#quoteTotal').textContent = formatMoney(total);
+      quoteBuilder.querySelector('#quoteSummary').value = 'Quick estimate: ' + formatMoney(total) + '. Selections: ' + [selected.dataset.label + ' (' + formatMoney(Number(selected.value)) + ')', color, ...extras.map(([key, value]) => quoteItems[key].label + ': ' + (quoteItems[key].suffix ? value + quoteItems[key].suffix : value))].join('; ') + '.';
+      quoteBuilder.querySelectorAll('[data-quote-output]').forEach(output => { const key = output.dataset.quoteOutput; output.textContent = quoteState[key] + quoteItems[key].suffix; });
+    };
+    quoteBuilder.querySelectorAll('[data-quote-change]').forEach(button => button.addEventListener('click', () => {
+      const key = button.dataset.quoteChange; quoteState[key] = Math.max(0, quoteState[key] + Number(button.dataset.delta));
+      quoteBuilder.querySelector('#quoteInclude').checked = true; renderQuote();
+    }));
+    quoteBuilder.querySelectorAll('input[name="quotePackage"], input[name="quoteColor"]').forEach(input => input.addEventListener('change', () => {
+      quoteBuilder.querySelector('#quoteInclude').checked = true; renderQuote();
+    }));
+    estimateForm.addEventListener('reset', () => setTimeout(() => { quoteBuilder.querySelector('#quoteInclude').checked = false; Object.keys(quoteState).forEach(key => quoteState[key] = 0); renderQuote(); }, 0));
+    renderQuote();
+  }
 })();
