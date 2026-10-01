@@ -96,6 +96,18 @@
   const photoInput = estimateForm?.querySelector('#propertyPhotos');
   const turnstileContainer = estimateForm?.querySelector('#estimate-turnstile');
   let turnstileWidgetId = null;
+  const calculatorSummary = window.sessionStorage.getItem('illuminatedCalculatorSummary');
+  if (calculatorSummary && estimateForm) {
+    const notesField = estimateForm.querySelector('#notes');
+    const serviceField = estimateForm.querySelector('#service');
+    if (serviceField) serviceField.value = 'Full-service holiday lighting';
+    if (notesField) notesField.value = calculatorSummary + '\n\n';
+    setTimeout(() => {
+      setFormMessage('Your quick estimate is included below. Add photos if you would like, or send it as-is for review.', 'success');
+      estimateForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
+    window.sessionStorage.removeItem('illuminatedCalculatorSummary');
+  }
 
   const setFormMessage = (text, state = '') => {
     if (!formMessage) return;
