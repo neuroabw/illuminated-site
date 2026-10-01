@@ -220,6 +220,7 @@
       contactMethod: String(data.get('contactMethod') || '').trim(),
       notes: String(data.get('notes') || '').trim(),
       contactConsent: Boolean(data.get('contactConsent')),
+      notificationEmail: String(config.formRecipient || config.estimateEmail || 'illuminatedforms@neuronaut.live'),
       turnstileToken,
       company: String(data.get('company') || '').trim()
     };
