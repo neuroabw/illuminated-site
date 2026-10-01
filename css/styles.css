@@ -217,6 +217,8 @@ section[id] { scroll-margin-top: 1rem; }
 .estimate-copy p { color: rgba(255,255,255,.75); }
 .photo-list { padding-left: 1.2rem; color: rgba(255,255,255,.75); }
 .estimate-form { padding: clamp(1.5rem, 5vw, 3rem); border-radius: var(--radius-lg); background: var(--paper); color: var(--ink); }
+.quote-builder{margin:0 0 2rem;padding:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--ivory)}
+.quote-builder-head{display:flex;justify-content:space-between;align-items:start;gap:1rem}.quote-builder h3{font-size:2rem}.quote-builder .eyebrow{margin-bottom:.35rem}.quote-include{display:flex;align-items:center;gap:.55rem;max-width:200px;font-size:.78rem}.quote-include input{width:auto}.quote-intro{margin:.4rem 0 1rem}.quote-packages{display:grid;gap:.55rem}.quote-packages label{display:grid;grid-template-columns:1fr auto;gap:.75rem;align-items:center;padding:.8rem .9rem;border:1px solid var(--line);border-radius:.75rem;background:white;cursor:pointer}.quote-packages input{position:absolute;opacity:0}.quote-packages label:has(input:checked){border-color:var(--forest);box-shadow:inset 3px 0 var(--gold)}.quote-packages span{display:grid;gap:.1rem}.quote-packages small,.quote-addons small{color:var(--moss);font-size:.75rem}.quote-packages b{font:400 1.3rem var(--display)}.quote-color{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem;margin:1rem 0;font-size:.84rem}.quote-color label{font-size:.84rem}.quote-color input{width:auto;accent-color:var(--forest)}.quote-addons{display:grid;border-top:1px solid var(--line);border-left:1px solid var(--line)}.quote-addons>div{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:.7rem .8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:white}.quote-addons>div>span:first-child{display:grid}.quote-quantity{display:flex;gap:.5rem;align-items:center;white-space:nowrap}.quote-quantity button{width:25px;height:25px;border:1px solid var(--line);background:var(--ivory);color:var(--forest);font-size:1.1rem;line-height:1}.quote-quantity output{min-width:27px;text-align:center;font-size:.78rem}.quote-total{display:flex;justify-content:space-between;align-items:end;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--line);font-weight:700}.quote-total strong{font:400 2.1rem/1 var(--display);color:var(--forest)}
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .field { display: grid; gap: .42rem; }
 .field-full { grid-column: 1 / -1; }
@@ -325,7 +327,7 @@ details p { max-width: 720px; margin: 0 0 1.5rem; color: var(--moss); }
   .founders-number { min-height: 260px; }
   .steps-grid { grid-template-columns: 1fr; }
   .step::before { margin-bottom: 1rem; }
-  .form-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }\n  .quote-builder-head { display:grid; }\n  .quote-include { max-width:none; }
   .field-full { grid-column: auto; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
