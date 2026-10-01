@@ -187,6 +187,13 @@ section[id] { scroll-margin-top: 1rem; }
 .price-card ul { padding-left: 1.1rem; }
 .price-card li { margin-block: .55rem; }
 
+.start-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+.start-card { min-height:330px; padding:clamp(2rem,5vw,4rem); border-radius:var(--radius-lg); background:var(--ivory); }
+.start-card-dark { color:white; background:var(--forest); }
+.start-card h3 { font-size:clamp(2.6rem,5vw,4.3rem); }
+.start-card p:not(.eyebrow) { max-width:460px; }
+.start-card-dark p:not(.eyebrow) { color:rgba(255,255,255,.76); }
+.start-card .button { margin-top:1rem; }
 .steps-grid { grid-template-columns: repeat(3, 1fr); counter-reset: step; }
 .step { counter-increment: step; padding: 2rem 1rem 2rem 0; border-top: 1px solid var(--line); }
 .step::before { content: "0" counter(step); display: block; margin-bottom: 3rem; color: var(--gold); font-weight: 700; letter-spacing: .12em; }
@@ -302,7 +309,7 @@ details p { max-width: 720px; margin: 0 0 1.5rem; color: var(--moss); }
   .hero-note { max-width: 420px; }
   .pricing-grid { grid-template-columns: 1fr; }
   .price-card.featured { transform: none; }
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid, .start-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 }
