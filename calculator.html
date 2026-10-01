@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holiday Lighting Estimate Calculator | Illuminated</title>
+  <meta name="description" content="Build a simple starting estimate for holiday lighting in Waco and Central Texas.">
+  <meta name="theme-color" content="#233b2e">
+  <link rel="canonical" href="https://illuminated.neuronaut.live/calculator.html">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body class="calculator-page">
+  <a class="skip-link" href="#calculator">Skip to calculator</a>
+  <header class="site-header calculator-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html" aria-label="Illuminated Landscape and Lighting home"><img class="brand-logo" src="assets/logos/illuminated-primary-transparent.png" alt="Illuminated Landscape & Lighting" width="1584" height="816"></a>
+      <a class="button button-light" href="index.html#estimate">Send photos instead</a>
+    </div>
+  </header>
+  <main id="calculator">
+    <section class="calculator-hero">
+      <div class="container calculator-hero-copy">
+        <p class="eyebrow">Holiday lighting · Waco, Texas</p>
+        <h1 class="display">Build a starting estimate.</h1>
+        <p>A simple way to explore a front-of-home display. We will confirm the design, measurement, and access before your installation is reserved.</p>
+      </div>
+    </section>
+    <section class="calculator-section">
+      <div class="container calculator-layout">
+        <form id="calculator-form" class="calculator-form">
+          <fieldset class="calc-group">
+            <legend class="display">1. Choose your roofline package</legend>
+            <p class="calc-help">Every full-service package includes commercial-grade lights, installation, reasonable in-season support, January takedown, and organized storage while you stay active.</p>
+            <div class="package-options">
+              <label class="package-option is-selected"><input type="radio" name="package" value="499" data-label="Front Porch" data-feet="75" checked><span><strong>Front Porch</strong><small>Up to 75 ft · simple one-story front roofline</small></span><b>$499</b></label>
+              <label class="package-option"><input type="radio" name="package" value="699" data-label="Classic Front" data-feet="110"><span><strong>Classic Front</strong><small>Up to 110 ft · straightforward front elevation</small></span><b>$699</b></label>
+              <label class="package-option"><input type="radio" name="package" value="949" data-label="Full Front" data-feet="150"><span><strong>Full Front</strong><small>Up to 150 ft · fuller front elevation</small></span><b>$949</b></label>
+            </div>
+          </fieldset>
+          <fieldset class="calc-group">
+            <legend class="display">2. Choose a light color</legend>
+            <div class="color-options">
+              <label><input type="radio" name="color" value="White lights" checked><span class="color-swatch white"></span><strong>White lights</strong></label>
+              <label><input type="radio" name="color" value="Colored lights"><span class="color-swatch color"></span><strong>Colored lights</strong></label>
+            </div>
+          </fieldset>
+          <fieldset class="calc-group">
+            <legend class="display">3. Add the details you love</legend>
+            <p class="calc-help">Add-ons are simple planning estimates. Larger trees, high-access work, steep roofs, and complex displays receive a custom quote.</p>
+            <div class="addon-options">
+              <div class="addon-row"><span><strong>Extra roofline</strong><small>One-story accessible roofline · 10-ft increments</small></span><div class="quantity"><button type="button" data-change="roofline" data-delta="-10" aria-label="Remove 10 feet of extra roofline">−</button><output data-output="roofline">0 ft</output><button type="button" data-change="roofline" data-delta="10" aria-label="Add 10 feet of extra roofline">+</button></div></div>
+              <div class="addon-row"><span><strong>Simple peak</strong><small>Low, ladder-accessible gable</small></span><div class="quantity"><button type="button" data-change="peak" data-delta="-1" aria-label="Remove a simple peak">−</button><output data-output="peak">0</output><button type="button" data-change="peak" data-delta="1" aria-label="Add a simple peak">+</button></div></div>
+              <div class="addon-row"><span><strong>Tree trunk</strong><small>Small tree · trunk only</small></span><div class="quantity"><button type="button" data-change="trunk" data-delta="-1" aria-label="Remove a tree trunk">−</button><output data-output="trunk">0</output><button type="button" data-change="trunk" data-delta="1" aria-label="Add a tree trunk">+</button></div></div>
+              <div class="addon-row"><span><strong>Tree with limbs</strong><small>Small tree · branches included</small></span><div class="quantity"><button type="button" data-change="tree" data-delta="-1" aria-label="Remove a tree with limbs">−</button><output data-output="tree">0</output><button type="button" data-change="tree" data-delta="1" aria-label="Add a tree with limbs">+</button></div></div>
+              <div class="addon-row"><span><strong>Wreath</strong><small>Installed 36-inch greenery wreath</small></span><div class="quantity"><button type="button" data-change="wreath" data-delta="-1" aria-label="Remove a wreath">−</button><output data-output="wreath">0</output><button type="button" data-change="wreath" data-delta="1" aria-label="Add a wreath">+</button></div></div>
+              <div class="addon-row"><span><strong>Walkway lighting</strong><small id="walkway-note">Flat charge · includes up to 30 ft</small></span><div class="quantity"><button type="button" data-change="walkway" data-delta="-1" aria-label="Remove walkway lighting">−</button><output data-output="walkway">0</output><button type="button" data-change="walkway" data-delta="1" aria-label="Add walkway lighting">+</button></div></div>
+              <div class="addon-row"><span><strong>Lit window</strong><small>Standard first-floor window</small></span><div class="quantity"><button type="button" data-change="window" data-delta="-1" aria-label="Remove a lit window">−</button><output data-output="window">0</output><button type="button" data-change="window" data-delta="1" aria-label="Add a lit window">+</button></div></div>
+              <div class="addon-row"><span><strong>Shrub accent</strong><small>Small or medium shrub</small></span><div class="quantity"><button type="button" data-change="shrub" data-delta="-1" aria-label="Remove a shrub accent">−</button><output data-output="shrub">0</output><button type="button" data-change="shrub" data-delta="1" aria-label="Add a shrub accent">+</button></div></div>
+            </div>
+          </fieldset>
+        </form>
+        <aside class="estimate-card" aria-live="polite">
+          <p class="eyebrow">Your starting estimate</p>
+          <h2 class="display" id="package-name">Front Porch</h2>
+          <div class="estimate-summary"><div><span>Package</span><b id="package-price">$499</b></div><div><span>Light color</span><b id="color-name">White lights</b></div></div>
+          <div id="addon-lines" class="addon-lines"><p>No add-ons yet.</p></div>
+          <div class="total"><span>Estimated total</span><strong id="total">$499</strong></div>
+          <p class="estimate-note">Walkway lighting includes up to <span data-walkway-feet>30</span> ft. Additional feet of lighting will cost more.</p>
+          <button class="button button-gold button-large" type="button" id="continue">Request this estimate</button>
+          <p class="estimate-disclaimer">Final pricing follows a photo review, exact lit-edge measurement, outlet access, and safe installation conditions.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <dialog id="request-dialog">
+    <button class="dialog-close" type="button" aria-label="Close">×</button>
+    <p class="eyebrow">Send your estimate</p><h2 class="display">We’ll confirm the details.</h2>
+    <p>Leave your information and we’ll follow up with a clear next step.</p>
+    <form id="estimate-request-form">
+      <input type="hidden" id="selection-summary" name="selection-summary">
+      <div class="dialog-fields"><label>Name<input name="name" required autocomplete="name"></label><label>Phone<input name="phone" required autocomplete="tel" type="tel"></label><label>Email<input name="email" required autocomplete="email" type="email"></label><label>Property address<input name="address" required autocomplete="street-address"></label><label>Anything we should know?<textarea name="notes" maxlength="800" placeholder="Add roof details, preferred timing, or questions."></textarea></label></div>
+      <button class="button button-gold button-large" type="submit">Send my estimate request</button><p id="request-message" class="request-message" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <script src="js/config.js"></script>
+  <script src="js/calculator.js"></script>
+</body>
+</html>
