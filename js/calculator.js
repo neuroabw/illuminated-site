@@ -3,7 +3,7 @@
   const recipient = String(window.ILLUMINATED_CONFIG?.formRecipient || 'illuminatedforms@neuronaut.live');
   const apiBase = String(window.ILLUMINATED_CONFIG?.leadsApiBaseUrl || '').replace(/\/+$/, '');
   const state = { roofline: 0, peak: 0, trunk: 0, tree: 0, wreath: 0, walkway: 0, window: 0, shrub: 0 };
-  const items = { roofline:{label:'Extra roofline',unit:70,increment:10,suffix:' ft'},peak:{label:'Simple peak',unit:95,increment:1,suffix:''},trunk:{label:'Tree trunk',unit:95,increment:1,suffix:''},tree:{label:'Tree with limbs',unit:195,increment:1,suffix:''},wreath:{label:'36-inch wreath',unit:95,increment:1,suffix:''},walkway:{label:'Walkway lighting',unit:95,increment:1,suffix:''},window:{label:'Lit window',unit:45,increment:1,suffix:''},shrub:{label:'Shrub accent',unit:65,increment:1,suffix:''} };
+  const items = { roofline:{label:'Extra roofline',unit:70,increment:10,suffix:' ft'},peak:{label:'Simple peak',unit:95,increment:1,suffix:''},trunk:{label:'Tree trunk',unit:110,increment:1,suffix:''},tree:{label:'Tree with limbs',unit:200,increment:1,suffix:''},wreath:{label:'36-inch wreath',unit:220,increment:1,suffix:''},walkway:{label:'Walkway lighting',unit:175,increment:1,suffix:''},window:{label:'Lit window',unit:70,increment:1,suffix:''},shrub:{label:'Shrub accent',unit:70,increment:1,suffix:''} };
   const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
   const packageChoice = () => document.querySelector('input[name="package"]:checked');
   const colorChoice = () => document.querySelector('input[name="color"]:checked').value;
@@ -31,7 +31,7 @@
     const selection = [
       x.pkg.dataset.label + ' (' + money(Number(x.pkg.value)) + ')',
       x.color,
-      ...x.extras.map(([key, n]) => items[key].label + ': ' + (items[key].suffix ? n + items[key].suffix : n))
+      ...x.extras.map(([key, n]) => items[key].label + ': ' + (items[key].suffix ? n+items[key].suffix : n))
     ].join('; ');
     window.sessionStorage.setItem('illuminatedCalculatorSummary', 'Quick estimate: ' + money(x.total) + '. Selections: ' + selection + '.');
     window.location.href = 'index.html#estimate';
