@@ -6,3 +6,8 @@ window.ILLUMINATED_CONFIG = {
   phoneDisplay: "254-900-2002",
   phoneHref: "+12549002002"
 };
+
+// Use the approved reversed logo asset on dark site backgrounds.
+document.querySelectorAll(".site-header .brand-logo, .site-footer .brand-logo").forEach((logo) => {
+  logo.src = "IMG_8529.png";
+});
