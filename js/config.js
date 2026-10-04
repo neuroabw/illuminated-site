@@ -7,7 +7,7 @@ window.ILLUMINATED_CONFIG = {
   phoneHref: "+12549002002"
 };
 
-// Use the reversed-color logo anywhere the brand sits on a dark background.
+// Use the revised transparent reversed logo anywhere the brand sits on a dark background.
 document.querySelectorAll(".site-header .brand-logo, .site-footer .brand-logo").forEach((logo) => {
-  logo.src = "Illuminated_logo_reverse_colored.PNG";
+  logo.src = "20261003_illuminated_logo_reverse_transparent_revised_2.jpg";
 });
