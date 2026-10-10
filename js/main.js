@@ -81,8 +81,8 @@
   });
 
   document.querySelectorAll('[data-phone]').forEach((element) => {
-    element.textContent = config.phoneDisplay || '254-900-2002';
-    if (element.tagName === 'A') element.href = `tel:${config.phoneHref || '+12549002002'}`;
+    element.textContent = config.phoneDisplay || '254-227-6094';
+    if (element.tagName === 'A') element.href = `tel:${config.phoneHref || '+12542276094'}`;
   });
   document.querySelectorAll('[data-email]').forEach((element) => {
     const email = config.estimateEmail || 'illuminated@neuronaut.live';
