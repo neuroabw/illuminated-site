@@ -3,8 +3,8 @@ window.ILLUMINATED_CONFIG = {
   formRecipient: "illuminatedforms@neuronaut.live",
   leadsApiBaseUrl: "https://illuminated-leads-api.illuminatedforms.workers.dev",
   turnstileSiteKey: "0x4AAAAAAEFEGxyPMHxzXw9n",
-  phoneDisplay: "254-900-2002",
-  phoneHref: "+12549002002"
+  phoneDisplay: "254-227-6094",
+  phoneHref: "+12542276094"
 };
 
 // Use the approved reversed logo asset on dark site backgrounds.
